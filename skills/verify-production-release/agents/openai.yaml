@@ -1,0 +1,11 @@
+interface:
+  display_name: Verify Production Release
+  short_description: Gate release, rollback, and production proof
+  default_prompt: Use $verify-production-release to assess release readiness.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

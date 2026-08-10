@@ -1,0 +1,11 @@
+interface:
+  display_name: Guard Approved Artifacts
+  short_description: Check artifact integrity before work begins
+  default_prompt: Use $guard-approved-artifacts to check approved delivery artifacts.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

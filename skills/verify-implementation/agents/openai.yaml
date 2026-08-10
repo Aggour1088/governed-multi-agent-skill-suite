@@ -1,0 +1,11 @@
+interface:
+  display_name: Verify Implementation Evidence
+  short_description: Validate fresh, traceable delivery evidence
+  default_prompt: Use $verify-implementation to verify this completion evidence.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

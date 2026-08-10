@@ -1,0 +1,11 @@
+interface:
+  display_name: Review Governed Change
+  short_description: Independently assess approved change quality
+  default_prompt: Use $review-governed-change to review this work package.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

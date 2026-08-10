@@ -1,0 +1,11 @@
+interface:
+  display_name: Architect System Deliberately
+  short_description: Choose proportional system designs with evidence
+  default_prompt: Use $architect-system-deliberately to assess this system change.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

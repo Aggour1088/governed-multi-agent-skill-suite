@@ -1,0 +1,11 @@
+interface:
+  display_name: Engineer Frontend Accessibly
+  short_description: Build usable, accessible client experiences
+  default_prompt: Use $engineer-frontend-accessibly to implement this client scope.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

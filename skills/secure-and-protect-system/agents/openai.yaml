@@ -1,0 +1,11 @@
+interface:
+  display_name: Secure and Protect System
+  short_description: Assess security, privacy, and abuse risks
+  default_prompt: Use $secure-and-protect-system to assess this change.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

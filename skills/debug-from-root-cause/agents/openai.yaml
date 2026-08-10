@@ -1,0 +1,11 @@
+interface:
+  display_name: Debug From Root Cause
+  short_description: Find causes and prevent regressions methodically
+  default_prompt: Use $debug-from-root-cause to investigate this defect.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

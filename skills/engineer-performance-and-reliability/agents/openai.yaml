@@ -1,0 +1,11 @@
+interface:
+  display_name: Engineer Performance and Reliability
+  short_description: Prove capacity, recovery, and observability
+  default_prompt: Use $engineer-performance-and-reliability to assess operational readiness.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

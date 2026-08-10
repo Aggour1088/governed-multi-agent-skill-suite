@@ -1,0 +1,11 @@
+interface:
+  display_name: Develop Test First
+  short_description: Prove behavior before and after implementation
+  default_prompt: Use $develop-test-first to develop this behavior safely.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

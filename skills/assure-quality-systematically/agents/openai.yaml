@@ -1,0 +1,11 @@
+interface:
+  display_name: Assure Quality Systematically
+  short_description: Test risk, usability, and regressions independently
+  default_prompt: Use $assure-quality-systematically to test this work package.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

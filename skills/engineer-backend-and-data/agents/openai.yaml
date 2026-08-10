@@ -1,0 +1,11 @@
+interface:
+  display_name: Engineer Backend and Data
+  short_description: Build safe APIs, data rules, and recovery paths
+  default_prompt: Use $engineer-backend-and-data to implement the backend scope.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

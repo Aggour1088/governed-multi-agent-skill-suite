@@ -1,0 +1,11 @@
+interface:
+  display_name: Plan Governed Implementation
+  short_description: Plan bounded work packages and proof requirements
+  default_prompt: Use $plan-governed-implementation to plan the approved work.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

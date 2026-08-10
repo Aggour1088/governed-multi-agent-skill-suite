@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0",
+  "work_package_id": "feature-001-package-001",
+  "risk_track": "Standard",
+  "owned_targets": ["src/example.py"],
+  "approved_artifacts": [
+    {
+      "id": "foundation",
+      "path": ".governance/features/feature-001/foundation.md",
+      "sha256": "sha256:<current-file-content-hash>"
+    }
+  ],
+  "roles": {
+    "implementer_id": "<declared-implementer-principal>",
+    "tester_id": "<declared-tester-principal>",
+    "reviewer_id": "<declared-reviewer-principal>",
+    "specialist_verifier_ids": []
+  },
+  "independence_status": "separate-pass-not-independent",
+  "implementation_fingerprint": "sha256:<recomputed-canonical-owned-targets-hash>",
+  "checks": [
+    {
+      "kind": "independent-test",
+      "status": "declared-passed",
+      "executor_role": "tester",
+      "declared_principal_id": "<declared-tester-principal>",
+      "implementation_fingerprint": "sha256:<recomputed-canonical-owned-targets-hash>",
+      "command": ["python3", "-m", "unittest"],
+      "exit_code": 0,
+      "evidence_artifacts": [
+        {
+          "path": ".governance/features/feature-001/evidence/independent-test.log",
+          "sha256": "sha256:<current-log-content-hash>"
+        }
+      ],
+      "recorded_at": "2026-08-09T00:00:00Z"
+    },
+    {
+      "kind": "independent-review",
+      "status": "declared-passed",
+      "executor_role": "reviewer",
+      "declared_principal_id": "<declared-reviewer-principal>",
+      "implementation_fingerprint": "sha256:<recomputed-canonical-owned-targets-hash>",
+      "command": ["review-tool", "--raw-diff"],
+      "exit_code": 0,
+      "evidence_artifacts": [
+        {
+          "path": ".governance/features/feature-001/evidence/independent-review.log",
+          "sha256": "sha256:<current-log-content-hash>"
+        }
+      ],
+      "recorded_at": "2026-08-09T00:00:00Z"
+    }
+  ]
+}

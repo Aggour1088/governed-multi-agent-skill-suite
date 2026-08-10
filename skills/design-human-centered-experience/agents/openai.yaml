@@ -1,0 +1,11 @@
+interface:
+  display_name: Design Human-Centered Experience
+  short_description: Define clear, safe, accessible user experiences
+  default_prompt: Use $design-human-centered-experience to define this user experience.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

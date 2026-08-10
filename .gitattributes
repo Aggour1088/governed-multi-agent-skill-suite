@@ -1,0 +1,2 @@
+# Markdown templates use two trailing spaces deliberately for rendered line breaks.
+*.md whitespace=-trailing-space

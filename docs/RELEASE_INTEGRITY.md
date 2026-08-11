@@ -41,13 +41,13 @@ In particular, checksums retrieved only from the same untrusted source as the tr
 
 4. Commit the exact release tree, including `SHA256SUMS`, and obtain the required review before creating the tag.
 5. At the final merged commit, rerun the consumer verification commands without `--write`. Do not alter the tree after this verification.
-6. Create a versioned annotated tag at that exact verified commit, for example `v1.2.2`.
+6. Create a versioned annotated tag at that exact verified commit, for example `v1.2.3`.
 7. Create a GitHub Release from that tag. Attach `SHA256SUMS` and, when produced, an archive built from the same tag.
 8. If the release is described as **signed**, the repository owner must sign the tag or checksum with the owner's signing key and publish the corresponding public key or trusted verification path.
 
 ## Current limitation
 
-This release candidate is **checksummed, not signed**. Do not imply that an annotated Git tag is cryptographically signed, that checksums authenticate an author, or that a self-declared execution record is verified. The raw standalone suite cannot supply those guarantees.
+This distribution is **checksummed, not signed**. Do not imply that an annotated Git tag is cryptographically signed, that checksums authenticate an author, or that a self-declared execution record is verified. The raw standalone suite cannot supply those guarantees.
 
 ## GitHub controls
 

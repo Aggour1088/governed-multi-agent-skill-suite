@@ -1,6 +1,6 @@
 # Governed Multi-Agent Skill Suite
 
-Version 1.2.2 — locally sealed release candidate; not yet published as a GitHub release.
+Version 1.2.3 — source distribution. Install only from a published versioned tag or release archive, not from a mutable branch.
 
 This is a source distribution of 20 focused Codex skills for owner-governed software delivery. It is for technical users or authorized AI agents that can work with local project files, Git, Python 3, and Codex. It is not a one-click installation, a hosted service, or a universal ChatGPT web feature.
 
@@ -105,11 +105,11 @@ python3 -m compileall -q scripts skills
 
 Never add `--write` to the first command when verifying a downloaded release. That flag is reserved for the release maintainer when deliberately rebuilding the checksum inventory; see [Release Integrity](docs/RELEASE_INTEGRITY.md).
 
-## Publication status
+## Release selection
 
-v1.2.2 is a locally validated candidate, not a public release. Before publication, follow the maintainer-only sequence in [Release Integrity](docs/RELEASE_INTEGRITY.md), preserve the exact tested tree, create a versioned tag, and publish the release from that tag. A GitHub repository or tag is a source-distribution mechanism; it does not automatically install or attest the skills.
+Install only from a published versioned tag or release archive, never directly from `main`. A matching GitHub tag and Release page establish publication; this source file does not assert whether any particular tag has been published. Follow the maintainer-only sequence in [Release Integrity](docs/RELEASE_INTEGRITY.md) before creating a new tag. A GitHub repository or tag is a source-distribution mechanism; it does not automatically install or attest the skills.
 
-See [v1.2.2 release notes](docs/RELEASE_NOTES_v1.2.2.md) for the documentation and installer changes in this candidate.
+See the [v1.2.3 release notes](docs/RELEASE_NOTES_v1.2.3.md) for the correction that makes this source documentation safe to publish.
 
 ## Scope
 

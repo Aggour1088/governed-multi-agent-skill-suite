@@ -55,6 +55,7 @@ RELEASE_DOCUMENTS = (
     "docs/HARDENING_v1.2.1.md",
     "docs/RELEASE_INTEGRITY.md",
     "docs/RELEASE_NOTES_v1.2.2.md",
+    "docs/RELEASE_NOTES_v1.2.3.md",
     "evaluations/README.md",
     "evaluations/adversarial-scenarios.json",
     "scripts/validate_evaluation_suite.py",
@@ -281,6 +282,16 @@ def validate_release_documents(repo: Path) -> list[str]:
     guide = documents["INSTALL.md"].read_text(encoding="utf-8")
     manifest = documents["docs/EXPORT_MANIFEST.md"].read_text(encoding="utf-8")
     release_integrity = documents["docs/RELEASE_INTEGRITY.md"].read_text(encoding="utf-8")
+    time_sensitive_publication_claims = (
+        "not yet published as a GitHub release",
+        "not a public release",
+        "this source has not yet been published",
+    )
+    for name, text in (("README.md", readme), ("docs/EXPORT_MANIFEST.md", manifest)):
+        if any(claim.lower() in text.lower() for claim in time_sensitive_publication_claims):
+            errors.append(f"{name} contains a time-sensitive publication claim")
+    if "Install only from a published versioned tag or release archive, not from a mutable branch." not in readme:
+        errors.append("README.md must direct users to a published versioned tag or release archive")
     if "](INSTALL.md)" not in readme:
         errors.append("README.md must link directly to INSTALL.md")
     if (
@@ -346,6 +357,12 @@ def validate_release_documents(repo: Path) -> list[str]:
     notes = documents["docs/RELEASE_NOTES_v1.2.2.md"].read_text(encoding="utf-8")
     if "not yet a published GitHub release" not in notes or "does not prove a live Codex host" not in notes:
         errors.append("v1.2.2 release notes must state the publication and live-discovery limits")
+    current_notes = documents["docs/RELEASE_NOTES_v1.2.3.md"].read_text(encoding="utf-8")
+    if (
+        "does not assert publication status" not in current_notes
+        or "does not prove a live Codex host" not in current_notes
+    ):
+        errors.append("v1.2.3 release notes must state the publication and live-discovery limits")
     return errors
 
 

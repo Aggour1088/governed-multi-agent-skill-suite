@@ -4,7 +4,7 @@
 
 This repository contains operating procedures and deterministic local validators. It does **not** provide host-level identity authentication, cryptographic agent attestation, access control for explicit skill invocation, credential storage, or automatic production authorization.
 
-The default v1.2.2 validator commands **do not accept self-declared execution records** at any risk level. A record may use `declared-passed` only as an untrusted declaration; it is never a verified test or review result. `--integrity-only` can lint contained-file hashes, timestamps, fingerprints, and declared-role consistency, but it does not prove that a command ran, authenticate an identity, or authorize technical acceptance. A trusted host integration must perform those actions outside this raw standalone suite.
+The default v1.2.3 validator commands **do not accept self-declared execution records** at any risk level. A record may use `declared-passed` only as an untrusted declaration; it is never a verified test or review result. `--integrity-only` can lint contained-file hashes, timestamps, fingerprints, and declared-role consistency, but it does not prove that a command ran, authenticate an identity, or authorize technical acceptance. A trusted host integration must perform those actions outside this raw standalone suite.
 
 ## Reporting a vulnerability
 

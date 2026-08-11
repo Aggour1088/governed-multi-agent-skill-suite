@@ -3,10 +3,10 @@
 ## Release identity
 
 - Name: Governed Multi-Agent Skill Suite
-- Version: 1.2.2
-- Export date: 2026-08-11
-- Source: this locally sealed release-candidate tree; validation results are checked separately and are not embedded proof artifacts
-- Publication status: not yet published as a GitHub release
+- Version: 1.2.3
+- Export date: 2026-08-12
+- Source: release source tree; validation results are checked separately and are not embedded proof artifacts
+- Publication status: a matching GitHub versioned tag and Release page establish publication; this manifest does not assert whether either exists
 - License: Apache License 2.0
 
 ## Contents

@@ -72,6 +72,27 @@ class SuiteValidationTests(unittest.TestCase):
         errors = validator.validate_release_documents(repository)
         self.assertEqual(errors, [], "\n".join(errors))
 
+    def test_documentation_validator_rejects_a_time_sensitive_publication_claim(self) -> None:
+        repository = Path(__file__).resolve().parents[1]
+        validator = load_validator(repository)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copy_root = Path(temp_dir) / "suite"
+            shutil.copytree(repository, copy_root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            readme = copy_root / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8").replace(
+                    "Install only from a published versioned tag or release archive, not from a mutable branch.",
+                    "This source has not yet been published as a GitHub release.",
+                    1,
+                ),
+                encoding="utf-8",
+            )
+
+            errors = validator.validate_release_documents(copy_root)
+
+        self.assertTrue(any("time-sensitive publication claim" in error for error in errors), errors)
+
     def test_documentation_validator_rejects_an_internal_runtime_path(self) -> None:
         repository = Path(__file__).resolve().parents[1]
         validator = load_validator(repository)

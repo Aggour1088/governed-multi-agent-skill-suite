@@ -583,7 +583,7 @@ class DeliveryHardeningTests(unittest.TestCase):
         skills = sorted((REPOSITORY / "skills").iterdir())
         missing = []
         for skill in skills:
-            if skill.name == "orchestrate-owner-governed-delivery" or not skill.is_dir():
+            if skill.name in {"orchestrate-owner-governed-delivery", "using-governed-suite"} or not skill.is_dir():
                 continue
             text = (skill / "SKILL.md").read_text(encoding="utf-8")
             if not all(

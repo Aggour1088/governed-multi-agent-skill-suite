@@ -24,6 +24,10 @@ During active governed delivery, work only under a bounded assignment contract. 
 7. Recheck relevant negative, boundary, integration, and recovery behavior. Produce an updated fingerprint and mark older evidence stale.
 8. Escalate after repeated failed hypotheses, a suspected architecture flaw, data integrity risk, security concern, or scope change.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a self-written log remains **Reported** or **Reproducible**. Stop if reproduction, scope, authority, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/root-cause-record-template.md' — diagnostic record.

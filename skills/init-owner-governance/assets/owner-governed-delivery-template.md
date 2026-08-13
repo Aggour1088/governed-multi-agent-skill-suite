@@ -1,9 +1,16 @@
 # Owner-Governed Delivery Constitution
 
-**Version:** 1.0  
+**Version:** 2.0  
 **Status:** Active after owner adoption  
 **Scope:** All governed software delivery in this repository  
 **Canonical path:** '.governance/owner-governed-delivery.md'
+
+## 0. Capability declaration and owner truth
+
+1. Keep one observed capability declaration at '.governance/capability-profile.json'. It records what the host can actually route, isolate, attest, protect, and deploy; it does not create those controls.
+2. Route each request through `$using-governed-suite` before exploration, delegation, mutation, deployment, or a completion claim.
+3. Use an Owner Truth Card for a material owner decision. State the decision, owner-visible outcome, evidence level, facts, unknowns, risk, cost/time estimate, rollback, stop conditions, and recommendation.
+4. Label material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only a capability-permitted E2+ host or CI receipt supports **Verified**.
 
 ## 1. Authority and communication
 
@@ -36,7 +43,7 @@ Use this order:
 ## 4. Work packages and role separation
 
 1. Define a work package as the smallest owner-visible deliverable that can be assigned, tested, reviewed, and accepted without concealing material risk.
-2. Bind each package to approved inputs, scope, risk, owned targets, permissions, acceptance criteria, evidence, and identities.
+2. Bind each package to a current common v2 work-package contract: approved inputs, scope, risk, owned targets, permissions, acceptance criteria, evidence, operations, economics, capabilities, and identities.
 3. Assign distinct implementer, tester, and reviewer identities for every package.
 4. Prohibit the implementer from testing, reviewing, or accepting its own package.
 5. Prohibit the tester from changing the implementation being judged.
@@ -58,7 +65,7 @@ Escalate risk on uncertainty. Reduce risk only with documented evidence and the 
 
 ## 6. Evidence and acceptance
 
-1. Treat agent statements, screenshots, summaries, and claims as unproven until raw evidence supports them.
+1. Treat agent statements, screenshots, summaries, and claims as unproven until raw evidence supports them. A local validator or self-written receipt remains Reproducible or Reported unless a permitted host receipt elevates it.
 2. Bind test and review evidence to the exact implementation fingerprint.
 3. Mark evidence stale after a material change to code, configuration, test, requirement, data, environment, or decision that can affect the result.
 4. Repeat affected checks after correction.

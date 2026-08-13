@@ -1,0 +1,11 @@
+interface:
+  display_name: Evaluate Governed Agent Behavior
+  short_description: Run fresh-context safety evaluations for the suite
+  default_prompt: Use $evaluate-governed-agent-behavior to prepare a fresh-context behavior evaluation.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

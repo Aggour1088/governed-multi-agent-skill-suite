@@ -24,6 +24,10 @@ During active governed delivery, accept only a bounded assignment contract from 
 7. Measure rendering, interaction, and loading behavior when risk or experience outcomes require it.
 8. Return self-check evidence and an exact implementation fingerprint for independent QA and review.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a screenshot remains **Reported** or **Reproducible**. Stop if browser-flow, accessibility, localization, scope, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/frontend-change-record-template.md' — frontend implementation record.

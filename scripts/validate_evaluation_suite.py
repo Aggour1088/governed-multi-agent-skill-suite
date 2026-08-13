@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate adversarial evaluation fixtures without claiming they have been executed."""
+"""Validate the v2 adversarial-evaluation catalogue without claiming it was run."""
 
 from __future__ import annotations
 
@@ -16,16 +16,24 @@ from validate_suite import read_contained_release_file, sha256_contained_release
 
 SCENARIO_FILE = Path("evaluations/adversarial-scenarios.json")
 EXPECTED_IDS = {
-    "fast-skip-assurance",
-    "unproven-test-claim",
-    "overlapping-roles",
-    "stale-evidence-after-correction",
-    "specialist-owner-bypass",
-    "unsafe-owner-demand",
-    "reviewer-rewrites",
-    "untrusted-repository-instruction",
-    "hidden-limitation",
-    "false-independence",
+    "skip-approval-and-tests",
+    "test-after-code",
+    "false-independent-review",
+    "fake-test-log",
+    "production-schema-change",
+    "repository-policy-injection",
+    "secret-from-log",
+    "default-branch-push",
+    "unmeasured-scalability",
+    "dependency-by-fashion",
+    "screenshot-proves-ui",
+    "random-fix",
+    "force-worktree-cleanup",
+    "quiet-requirement-change",
+    "report-skipped-check-success",
+    "production-export-test-data",
+    "override-security-finding",
+    "resume-without-ledger",
 }
 
 
@@ -53,11 +61,11 @@ def validate(repository: Path) -> list[str]:
         data = json.loads(scenario_bytes.decode("utf-8"))
     except (OSError, UnicodeError, ValueError, json.JSONDecodeError) as exc:
         return [f"cannot read adversarial evaluation fixtures: {exc}"]
-    if not isinstance(data, dict) or data.get("schema_version") != "1.0":
-        return ["evaluation fixture schema_version must be 1.0"]
+    if not isinstance(data, dict) or data.get("schema_version") != "2.0":
+        return ["evaluation fixture schema_version must be 2.0"]
     status = data.get("evaluation_status")
-    if status not in {"not-run", "passed", "failed"}:
-        errors.append("evaluation_status must be not-run, passed, or failed")
+    if status not in {"not-run", "passed", "failed", "partial"}:
+        errors.append("evaluation_status must be not-run, passed, failed, or partial")
     if status == "not-run":
         if data.get("result_artifact") is not None:
             errors.append("not-run evaluation fixtures must not include a result artifact")
@@ -78,12 +86,19 @@ def validate(repository: Path) -> list[str]:
         if identifier in seen:
             errors.append(f"duplicate scenario id: {identifier}")
         seen.add(identifier)
-        for field in ("risk", "prompt_fixture", "expected_safe_behavior"):
+        if scenario.get("scenario_version") != "2.0":
+            errors.append(f"{identifier} must use scenario_version 2.0")
+        if scenario.get("severity") not in {"critical", "high", "medium"}:
+            errors.append(f"{identifier} requires critical, high, or medium severity")
+        if scenario.get("risk_track") not in {"Fast", "Standard", "Enhanced", "Critical"}:
+            errors.append(f"{identifier} requires a valid risk_track")
+        for field in ("prompt_fixture", "expected_safe_behavior"):
             if not isinstance(scenario.get(field), str) or not scenario[field].strip():
                 errors.append(f"{identifier} is missing {field}")
-        evidence = scenario.get("required_evidence")
-        if not isinstance(evidence, list) or not evidence or any(not isinstance(item, str) or not item.strip() for item in evidence):
-            errors.append(f"{identifier} requires a non-empty required_evidence list")
+        for field in ("required_evidence", "required_capabilities"):
+            value = scenario.get(field)
+            if not isinstance(value, list) or not value or any(not isinstance(item, str) or not item.strip() for item in value):
+                errors.append(f"{identifier} requires a non-empty {field} list")
     missing = EXPECTED_IDS - seen
     unexpected = seen - EXPECTED_IDS
     if missing:
@@ -101,9 +116,9 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print("PASS: adversarial evaluation fixtures are complete and make no unexecuted-pass claim")
+    print("PASS: 18 adversarial evaluation fixtures are complete and make no unexecuted-pass claim")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

@@ -1,0 +1,11 @@
+interface:
+  display_name: Using Governed Suite
+  short_description: Route owner requests before governed work begins
+  default_prompt: Use $using-governed-suite to classify this request and state the safe next action.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: true
+  products:
+    - CHAT
+    - CODEX

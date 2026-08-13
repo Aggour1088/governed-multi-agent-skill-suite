@@ -1,0 +1,17 @@
+{
+  "schema_version": "2.0",
+  "work_package_id": "match-the-contract-id",
+  "baseline_revision": "match-the-contract-baseline-revision",
+  "workspace_id": "human-readable-isolated-workspace-id",
+  "status": "planned",
+  "fix_round": 0,
+  "tasks": [
+    {
+      "id": "implement-smallest-slice",
+      "role": "implementer",
+      "status": "planned",
+      "owned_targets": ["src/example.py"]
+    }
+  ],
+  "next_safe_action": "Validate the contract, ownership matrix, and baseline before editing."
+}

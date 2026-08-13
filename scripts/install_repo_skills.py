@@ -229,7 +229,7 @@ def main() -> int:
             for error in errors:
                 print(f"- {error}")
             return 1
-        print(f"PASS: installed copy exactly matches the verified 20-skill source at {destination}")
+        print(f"PASS: installed copy exactly matches the verified skill source at {destination}")
         return 0
 
     errors = install(source_skills, source_manifest, project_root)
@@ -238,7 +238,8 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
-    print(f"PASS: installed 20 exact skill folders at {project_root / '.agents' / 'skills'}")
+    installed_count = len([path for path in source_skills.iterdir() if path.is_dir()])
+    print(f"PASS: installed {installed_count} exact skill folders at {project_root / '.agents' / 'skills'}")
     return 0
 
 

@@ -36,6 +36,10 @@ EXPECTED_SKILLS = {
     "specify-approved-change",
     "verify-implementation",
     "verify-production-release",
+    "using-governed-suite",
+    "coordinate-isolated-agent-execution",
+    "govern-data-change-safely",
+    "evaluate-governed-agent-behavior",
 }
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -56,6 +60,10 @@ RELEASE_DOCUMENTS = (
     "docs/RELEASE_INTEGRITY.md",
     "docs/RELEASE_NOTES_v1.2.2.md",
     "docs/RELEASE_NOTES_v1.2.3.md",
+    "docs/RELEASE_NOTES_v2.0.0-rc.1.md",
+    "docs/v2/OWNER_PROTECTION_FOUNDATION.md",
+    "docs/v2/CAPABILITY_MATRIX.md",
+    "docs/v2/UPGRADE_PATH.md",
     "evaluations/README.md",
     "evaluations/adversarial-scenarios.json",
     "scripts/validate_evaluation_suite.py",
@@ -72,6 +80,36 @@ DIRECT_INVOCATION_PHRASES = (
     "assignment contract",
     "read-only consultation",
     "do not modify a project",
+)
+ROUTER_SKILLS = {"orchestrate-owner-governed-delivery", "using-governed-suite"}
+V2_EXISTING_SKILLS = EXPECTED_SKILLS - {
+    "using-governed-suite",
+    "coordinate-isolated-agent-execution",
+    "govern-data-change-safely",
+    "evaluate-governed-agent-behavior",
+}
+V2_COMMON_CONTROL_PHRASES = (
+    "## V2 contract and evidence boundary",
+    "$using-governed-suite",
+    "Verified",
+    "Reproducible",
+    "Reported",
+    "Inferred",
+    "Unknown",
+    "Failed",
+)
+V2_REQUIRED_PATHS = (
+    "adapters/local-evidence-runner/run_governed_command.py",
+    "adapters/local-evidence-runner/verify_receipt.py",
+    "adapters/local-evidence-runner/README.md",
+    "skills/using-governed-suite/scripts/contract_rules.py",
+    "skills/using-governed-suite/scripts/validate_work_package_contract.py",
+    "skills/coordinate-isolated-agent-execution/scripts/prepare_isolated_workspace.py",
+    "skills/coordinate-isolated-agent-execution/scripts/validate_execution_ledger.py",
+    "skills/govern-data-change-safely/scripts/validate_data_change_plan.py",
+    "skills/evaluate-governed-agent-behavior/scripts/validate_evaluation_run.py",
+    "skills/evaluate-governed-agent-behavior/scripts/generate_scorecard.py",
+    ".github/workflows/validate.yml",
 )
 CHECKSUM_FILE = "SHA256SUMS"
 CHECKSUM_LINE_RE = re.compile(r"^([0-9a-f]{64})  ([^\s].*)$")
@@ -251,6 +289,9 @@ def validate_release_documents(repo: Path) -> list[str]:
         if not document.is_file():
             errors.append(f"missing {name}")
 
+    if errors:
+        return errors
+
     resolved_repo = repo.resolve()
     for name, document in documents.items():
         if not document.is_file():
@@ -363,13 +404,52 @@ def validate_release_documents(repo: Path) -> list[str]:
         or "does not prove a live Codex host" not in current_notes
     ):
         errors.append("v1.2.3 release notes must state the publication and live-discovery limits")
+    v2_notes = documents["docs/RELEASE_NOTES_v2.0.0-rc.1.md"].read_text(encoding="utf-8")
+    v2_foundation = documents["docs/v2/OWNER_PROTECTION_FOUNDATION.md"].read_text(encoding="utf-8")
+    capability_matrix = documents["docs/v2/CAPABILITY_MATRIX.md"].read_text(encoding="utf-8")
+    upgrade_path = documents["docs/v2/UPGRADE_PATH.md"].read_text(encoding="utf-8")
+    if "not behaviorally evaluated" not in v2_notes.lower() or "release candidate" not in v2_notes.lower():
+        errors.append("v2 release notes must identify the source as an unevaluated release candidate")
+    if "Owner Truth Card" not in v2_foundation or "trusted host" not in v2_foundation:
+        errors.append("v2 foundation must state the owner card and trusted-host boundary")
+    if "explicit-only" not in capability_matrix or "not enforcement" not in capability_matrix.lower():
+        errors.append("v2 capability matrix must describe explicit routing and non-enforcement honestly")
+    if "v1.2.3" not in upgrade_path or "no overwrite" not in upgrade_path.lower():
+        errors.append("v2 upgrade path must explain safe migration from v1.2.3 without overwrite")
+    if (
+        "Version 2.0.0-rc.1" not in readme
+        or "24 focused Codex skills" not in readme
+        or "$using-governed-suite" not in readme
+        or "not behaviorally evaluated" not in readme.lower()
+    ):
+        errors.append("README.md must identify the 24-skill v2 release candidate and first-turn router honestly")
+    if (
+        "24 standalone skill folders" not in guide
+        or "all 24 skills" not in guide
+        or "$using-governed-suite Explain the owner-governed workflow" not in guide
+    ):
+        errors.append("INSTALL.md must describe 24-skill v2 discovery through the first-turn router")
+    if (
+        "Version: 2.0.0-rc.1" not in manifest
+        or "24 portable skills" not in manifest
+        or "Eighteen adversarial evaluation fixtures" not in manifest
+        or "release candidate" not in manifest.lower()
+    ):
+        errors.append("Export manifest must describe the v2 release-candidate scope without a behavior claim")
+    security = documents["SECURITY.md"].read_text(encoding="utf-8")
+    if (
+        "v2.0.0-rc.1 standalone validator commands" not in security
+        or "E1 reproducible receipt" not in security
+        or "Neither mode proves independent agent identity" not in security
+    ):
+        errors.append("SECURITY.md must state the local runner assurance boundary accurately")
     return errors
 
 
 def validate_specialist_invocation_boundaries(repo: Path) -> list[str]:
     """Require every specialist to refuse project mutation without orchestration."""
     errors: list[str] = []
-    for skill_name in sorted(EXPECTED_SKILLS - {"orchestrate-owner-governed-delivery"}):
+    for skill_name in sorted(EXPECTED_SKILLS - ROUTER_SKILLS):
         skill_file = repo / "skills" / skill_name / "SKILL.md"
         ui_file = repo / "skills" / skill_name / "agents" / "openai.yaml"
         if not skill_file.is_file():
@@ -379,6 +459,30 @@ def validate_specialist_invocation_boundaries(repo: Path) -> list[str]:
             errors.append(f"{skill_name} lacks the required direct-invocation safety boundary")
         if not ui_file.is_file() or "allow_implicit_invocation: false" not in ui_file.read_text(encoding="utf-8"):
             errors.append(f"{skill_name} must disable implicit invocation")
+    return errors
+
+
+def validate_v2_owner_protection_spine(repo: Path) -> list[str]:
+    """Require v2 controls while preserving the line between procedures and enforcement."""
+    errors: list[str] = []
+    for relative in V2_REQUIRED_PATHS:
+        path = repo / relative
+        if not path.is_file():
+            errors.append(f"missing v2 owner-protection resource: {relative}")
+    for skill_name in sorted(V2_EXISTING_SKILLS):
+        skill_file = repo / "skills" / skill_name / "SKILL.md"
+        if not skill_file.is_file():
+            continue
+        text = skill_file.read_text(encoding="utf-8")
+        missing = [phrase for phrase in V2_COMMON_CONTROL_PHRASES if phrase not in text]
+        if missing:
+            errors.append(f"{skill_name} lacks common v2 controls: {', '.join(missing)}")
+    router = repo / "skills" / "using-governed-suite" / "SKILL.md"
+    if router.is_file():
+        text = router.read_text(encoding="utf-8")
+        for phrase in ("Orientation Card", "Owner Truth Card", "not a claim that the host automatically enforces governance"):
+            if phrase not in text:
+                errors.append(f"using-governed-suite lacks required routing boundary: {phrase}")
     return errors
 
 
@@ -755,6 +859,10 @@ def main() -> int:
         print(f"FAIL: {error}")
 
     for error in validate_specialist_invocation_boundaries(repo):
+        failures += 1
+        print(f"FAIL: {error}")
+
+    for error in validate_v2_owner_protection_spine(repo):
         failures += 1
         print(f"FAIL: {error}")
 

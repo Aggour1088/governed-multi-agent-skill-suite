@@ -24,6 +24,10 @@ During active governed delivery, receive a bounded assignment contract from $orc
 7. Test recovery, partial failure, timeout, retry, overload, restart, and data reconciliation behavior proportionately to risk.
 8. Return Pass, Conditional, or Fail with raw measurements, baselines, limitations, and release implications.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; an unmeasured scalability claim remains **Inferred** or **Unknown**. Stop if the workload model, SLOs, recovery evidence, or freshness is missing or stale.
+
 ## Resources
 
 - 'assets/reliability-assessment-template.md' — operational verifier record.

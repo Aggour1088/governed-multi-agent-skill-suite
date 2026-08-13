@@ -32,6 +32,10 @@ During active governed delivery, work only under an assignment contract and repo
 - Do not commit to infrastructure, packages, deployment, or data operation without explicit authority.
 - Do not collapse independent deliverables solely to reduce paperwork.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a planned task is **Reported** until it has current evidence. Stop if task ownership, cost/concurrency limit, scope, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/implementation-plan-template.md' — work-package plan.

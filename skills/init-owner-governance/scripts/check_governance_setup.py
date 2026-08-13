@@ -27,6 +27,8 @@ def check_adapter(path: Path) -> list[str]:
         errors.append(f"{path}: adapter must point to canonical constitution")
     if "$orchestrate-owner-governed-delivery" not in text:
         errors.append(f"{path}: adapter must name the orchestrator")
+    if "$using-governed-suite" not in text:
+        errors.append(f"{path}: adapter must name the v2 router")
     return errors
 
 
@@ -42,6 +44,16 @@ def main() -> int:
         errors.append(f"missing canonical constitution: {policy}")
     elif "Owner-Governed Delivery Constitution" not in policy.read_text(encoding="utf-8"):
         errors.append(f"constitution marker missing: {policy}")
+
+    capability_profile = root / ".governance/capability-profile.json"
+    if capability_profile.exists():
+        try:
+            profile_text = capability_profile.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as exc:
+            errors.append(f"cannot read capability profile: {capability_profile}: {exc}")
+        else:
+            if '"schema_version": "2.0"' not in profile_text:
+                errors.append(f"capability profile must declare schema_version 2.0: {capability_profile}")
 
     agents = root / "AGENTS.md"
     if not agents.exists():

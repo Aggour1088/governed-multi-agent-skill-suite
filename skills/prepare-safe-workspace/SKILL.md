@@ -28,6 +28,10 @@ During active governed delivery, work only under an assignment contract and repo
 
 Stop and return a blocker for a missing contract, unclear target, unverified approval, user change that could be overwritten, failed baseline without cause, insufficient permission, unresolved conflict, or missing recovery path for higher-risk change.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a local baseline record remains **Reproducible**. Stop if workspace isolation, permissions, scope, user work, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/preflight-record-template.md' — preflight record.

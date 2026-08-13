@@ -23,6 +23,10 @@ During active governed delivery, receive a bounded assignment contract from $orc
 6. Do not make edits, rerun a mutable setup that changes the target, approve a failed test, or hide an unverified claim.
 7. Return Approve, Approve with documented non-blocking condition, or Request changes. Only the orchestrator can technically accept.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a reviewer report remains **Reported** or **Reproducible** unless the host attests the review mode. Stop if raw diff, role boundary, scope, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/review-report-template.md' — independent review record.

@@ -1,6 +1,6 @@
 # Install the Governed Multi-Agent Skill Suite
 
-This repository contains **20 standalone skill folders**. Install each folder as a separate skill; do not treat the repository root as one skill.
+This repository contains **24 standalone skill folders**. Install each folder as a separate skill; do not treat the repository root as one skill.
 
 ## Who this guide is for
 
@@ -64,7 +64,7 @@ python3 "$SUITE_DIR/scripts/install_repo_skills.py" \
   --project-root "$PROJECT_ROOT"
 ```
 
-The command validates the source again before writing, copies through a temporary directory, verifies every installed file against the source, then places the 20 folders in:
+The command validates the source again before writing, copies through a temporary directory, verifies every installed file against the source, then places the 24 folders in:
 
 ```text
 <PROJECT_ROOT>/.agents/skills/
@@ -83,15 +83,15 @@ python3 "$SUITE_DIR/scripts/install_repo_skills.py" \
 
 ## Verify Codex discovery
 
-Start Codex from the target repository root and use `/skills` in Codex CLI or the IDE extension. Confirm that all 20 skills appear, including `orchestrate-owner-governed-delivery`.
+Start Codex from the target repository root and use `/skills` in Codex CLI or the IDE extension. Confirm that all 24 skills appear, including `using-governed-suite` and `orchestrate-owner-governed-delivery`.
 
 Then use an explicit, harmless request:
 
 ```text
-$orchestrate-owner-governed-delivery Explain the owner-governed workflow without modifying this project.
+$using-governed-suite Explain the owner-governed workflow without modifying this project.
 ```
 
-Expected result: it should discuss the owner outcome, lifecycle, evidence, and limitations before proposing any project change. The installer proves an exact file copy; it does not itself prove that a particular Codex host has enabled local skills or has discovered them. If the skills do not appear, keep the installer output, check that Codex was started from `PROJECT_ROOT`, and consult your host or administrator controls before changing files.
+Expected result: it should return an Orientation Card with authority, risk, known facts, unknowns, and a safe next route without inspecting or changing the project. The installer proves an exact file copy; it does not itself prove that a particular Codex host has enabled local skills or has discovered them. If the skills do not appear, keep the installer output, check that Codex was started from `PROJECT_ROOT`, and consult your host or administrator controls before changing files.
 
 ## Updating safely
 

@@ -1,0 +1,14 @@
+{
+  "schema_version": "2.0",
+  "host": {"name": "replace-with-host", "version": "replace-with-version"},
+  "skill_routing": "explicit-only",
+  "tool_mediation": "advisory",
+  "agent_identity": "session-label",
+  "workspace_isolation": "worktree",
+  "test_evidence": "reproducible",
+  "browser_verification": "manual",
+  "ci_cd_integration": "reporting-only",
+  "secret_boundary": "environment-scoped",
+  "production_control": "owner-confirmed",
+  "owner_summary": "This installation can record reproducible evidence, but it cannot prove independent agent identity or protected deployment without a configured host adapter."
+}

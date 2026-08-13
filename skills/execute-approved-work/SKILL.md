@@ -28,6 +28,10 @@ Do not act as tester, reviewer, technical acceptor, owner reporter, or release a
 
 When a tester, reviewer, or specialist finding requires a change, update the implementation fingerprint and mark every affected prior evidence record stale. Return the package through independent testing and review again.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; an implementer self-check remains **Reported** or **Reproducible**. Stop if contract scope, authority, rollback path, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/implementation-self-check-template.md' — implementer return record.

@@ -49,6 +49,10 @@ Hand an approved Foundation to $design-human-centered-experience, $specify-appro
 
 Lead with a practical recommendation and its trade-off. Present only the decisions needed next, in ordinary language. State what is known, unknown, excluded, and not yet authorized.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` before treating a requested solution as direction. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; owner suggestions and uninspected sources remain **Reported** or **Unknown**. Stop if user outcome, alternatives, approval, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/feature-foundation-template.md' — canonical artifact.

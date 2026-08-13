@@ -18,6 +18,6 @@ v2 adds four skills, a common v2 contract, Owner Truth Cards, a capability profi
 
 Restore the preserved v1.2.3 skill directory or remove the separate v2 staging scope. Do not delete the old scope until a named owner accepts the migration result. A suite upgrade cannot rewrite a project constitution, user files, deployment configuration, or evidence records automatically.
 
-## Release-candidate limitation
+## Behavior-evaluation boundary
 
-The v2.0.0-rc.1 source is not behaviorally evaluated across advertised hosts/models. Do not replace a production governance path solely because the static suite validation passes.
+v2.0.0 has a completed E1 fresh-context evaluation of all 18 maintained scenarios for the exact `chatgpt-codex-gpt-5-6-platform-managed` configuration and the router fingerprint recorded in the [behavior scorecard](BEHAVIOR_SCORECARD_v2.0.0.md). It is not evaluated for other hosts, models, capability profiles, or changed router material, and it does not provide host enforcement or independent-agent identity attestation. Do not replace a production governance path solely because static validation or this one configuration’s scorecard passes.

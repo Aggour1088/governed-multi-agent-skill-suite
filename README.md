@@ -1,6 +1,6 @@
 # Governed Multi-Agent Skill Suite
 
-Version 2.0.0-rc.1 — source release candidate. Install only from a published versioned tag or release archive, not from a mutable branch. This candidate has deterministic validation but is not behaviorally evaluated on a live host/model configuration.
+Version 2.0.0 — source release. Install only from a published versioned tag or release archive, not from a mutable branch. The first-turn router completed a fresh-context E1 behavior evaluation for the exact `chatgpt-codex-gpt-5-6-platform-managed` configuration: all 18 maintained scenarios passed. See the [behavior scorecard](docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md) for the retained evidence and limits.
 
 This is a source distribution of 24 focused Codex skills for owner-governed software delivery. It is for technical users or authorized AI agents that can work with local project files, Git, Python 3, and Codex. It is not a one-click installation, a hosted service, or a universal ChatGPT web feature.
 
@@ -34,7 +34,7 @@ The bundled validators recompute hashes from contained regular files, check cano
 
 The 22 specialist skills state that, without an orchestrator-issued assignment contract, they should provide only a read-only consultation. This is an instruction-level safeguard, not platform enforcement.
 
-The repository includes eighteen fresh-context adversarial evaluation fixtures, all marked `not-run`. CI can validate that the fixtures are complete and do not fabricate a result; it is not evidence that a live agent behavior trial occurred. See [Evaluations](evaluations/README.md).
+The repository includes eighteen fresh-context adversarial evaluation scenarios and a completed, hash-bound E1 result set for one named configuration. This is evidence of observed behavior only for that configuration and routed source fingerprint; it is not host enforcement, independent-agent identity attestation, or a claim about untested models or hosts. See [Evaluations](evaluations/README.md).
 
 ## Skills
 
@@ -115,7 +115,7 @@ Never add `--write` to the first command when verifying a downloaded release. Th
 
 Install only from a published versioned tag or release archive, never directly from `main`. A matching GitHub tag and Release page establish publication; this source file does not assert whether any particular tag has been published. Follow the maintainer-only sequence in [Release Integrity](docs/RELEASE_INTEGRITY.md) before creating a new tag. A GitHub repository or tag is a source-distribution mechanism; it does not automatically install or attest the skills.
 
-Read the [v2.0.0-rc.1 release notes](docs/RELEASE_NOTES_v2.0.0-rc.1.md) and [v2 owner-protection foundation](docs/v2/OWNER_PROTECTION_FOUNDATION.md) before treating this candidate as an upgrade. It is not a final v2 release until representative live-host behavioral evaluations are recorded.
+Read the [v2.0.0 release notes](docs/RELEASE_NOTES_v2.0.0.md), [behavior scorecard](docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md), and [v2 owner-protection foundation](docs/v2/OWNER_PROTECTION_FOUNDATION.md) before upgrading. This is a final source release, but its behavioral result must not be generalized beyond the named E1 configuration.
 
 ## Scope
 

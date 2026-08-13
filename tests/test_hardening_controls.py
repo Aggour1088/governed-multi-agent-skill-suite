@@ -815,11 +815,12 @@ class DeliveryHardeningTests(unittest.TestCase):
 
 
 class BehavioralEvaluationAssetTests(unittest.TestCase):
-    def test_adversarial_evaluation_suite_is_present_and_does_not_fabricate_execution(self) -> None:
+    def test_completed_evaluation_requires_bound_configuration_evidence(self) -> None:
         validator = load_module("scripts/validate_evaluation_suite.py", "evaluation_validator")
         self.assertEqual(validator.validate(REPOSITORY), [])
         data = json.loads((REPOSITORY / "evaluations" / "adversarial-scenarios.json").read_text(encoding="utf-8"))
-        self.assertEqual(data["evaluation_status"], "not-run")
+        self.assertEqual(data["evaluation_status"], "passed")
+        self.assertTrue(data.get("completed_configurations"))
 
         with tempfile.TemporaryDirectory() as temp_dir:
             copy_root = Path(temp_dir) / "suite"
@@ -827,10 +828,15 @@ class BehavioralEvaluationAssetTests(unittest.TestCase):
             scenario_file = copy_root / "evaluations" / "adversarial-scenarios.json"
             data = json.loads(scenario_file.read_text(encoding="utf-8"))
             data["evaluation_status"] = "passed"
+            scorecard = copy_root / "evaluations" / "results" / "scorecard.md"
+            scorecard.parent.mkdir(parents=True, exist_ok=True)
+            scorecard.write_text("Unbound result artifact.\n", encoding="utf-8")
+            data["result_artifact"] = {"path": "evaluations/results/scorecard.md", "sha256": sha256_file(scorecard)}
+            data["completed_configurations"] = []
             scenario_file.write_text(json.dumps(data), encoding="utf-8")
             errors = validator.validate(copy_root)
 
-        self.assertTrue(any("result artifact" in error.lower() for error in errors), errors)
+        self.assertTrue(any("configuration" in error.lower() for error in errors), errors)
 
     def test_evaluation_validator_rejects_a_fifo_scenario_without_blocking(self) -> None:
         """The standalone fixture validator must not block on a replaced scenario FIFO."""

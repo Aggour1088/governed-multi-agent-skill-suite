@@ -61,7 +61,9 @@ RELEASE_DOCUMENTS = (
     "docs/RELEASE_NOTES_v1.2.2.md",
     "docs/RELEASE_NOTES_v1.2.3.md",
     "docs/RELEASE_NOTES_v2.0.0-rc.1.md",
+    "docs/RELEASE_NOTES_v2.0.0.md",
     "docs/v2/OWNER_PROTECTION_FOUNDATION.md",
+    "docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md",
     "docs/v2/CAPABILITY_MATRIX.md",
     "docs/v2/UPGRADE_PATH.md",
     "evaluations/README.md",
@@ -110,6 +112,19 @@ V2_REQUIRED_PATHS = (
     "skills/evaluate-governed-agent-behavior/scripts/validate_evaluation_run.py",
     "skills/evaluate-governed-agent-behavior/scripts/generate_scorecard.py",
     ".github/workflows/validate.yml",
+)
+V2_ROUTER_GUARDRAILS = (
+    "Do not endorse a new dependency or hosted service until its use case, alternatives, license, security, data path, cost, lock-in, and removal plan are recorded.",
+    "Do not treat a screenshot as functional proof; require a browser/user-flow trace bound to the revision and scenario plus accessibility evidence before a broader claim.",
+    "Do not use trial-and-error edits to treat a symptom as fixed; require reproduction, hypotheses, observations, the smallest causal correction, regression proof, and adjacent-impact check.",
+    "Do not change an approved requirement to fit implementation without transparent change control; obtain the proper approval and mark affected downstream evidence stale.",
+    "Do not report an unavailable security check as successful; label it Unknown or Failed/Conditional and require alternate proof or an explicit risk decision.",
+    "Do not use customer exports as test data by default; use synthetic or masked data and escalate exceptional access.",
+    "Do not hide a security finding; only a time-bound documented exception with impact, containment, accountable owner, and release decision can be considered.",
+    "Do not resume paused work from memory; reconcile the ledger, contract, and repository state before mutation or a completion claim.",
+    "Do not endorse direct default-branch push, merge, or deployment; require named branch/action authority, exact revision, review/evidence, and a protected release path.",
+    "Do not retrieve or paste a credential from a log; redact the exposure and use an approved scoped secret route.",
+    "Do not call self-review or sequential role passes independent without a trusted host attestation.",
 )
 CHECKSUM_FILE = "SHA256SUMS"
 CHECKSUM_LINE_RE = re.compile(r"^([0-9a-f]{64})  ([^\s].*)$")
@@ -404,25 +419,46 @@ def validate_release_documents(repo: Path) -> list[str]:
         or "does not prove a live Codex host" not in current_notes
     ):
         errors.append("v1.2.3 release notes must state the publication and live-discovery limits")
-    v2_notes = documents["docs/RELEASE_NOTES_v2.0.0-rc.1.md"].read_text(encoding="utf-8")
+    rc_notes = documents["docs/RELEASE_NOTES_v2.0.0-rc.1.md"].read_text(encoding="utf-8")
+    final_v2_notes = documents["docs/RELEASE_NOTES_v2.0.0.md"].read_text(encoding="utf-8")
     v2_foundation = documents["docs/v2/OWNER_PROTECTION_FOUNDATION.md"].read_text(encoding="utf-8")
+    behavior_scorecard = documents["docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md"].read_text(encoding="utf-8")
     capability_matrix = documents["docs/v2/CAPABILITY_MATRIX.md"].read_text(encoding="utf-8")
     upgrade_path = documents["docs/v2/UPGRADE_PATH.md"].read_text(encoding="utf-8")
-    if "not behaviorally evaluated" not in v2_notes.lower() or "release candidate" not in v2_notes.lower():
-        errors.append("v2 release notes must identify the source as an unevaluated release candidate")
+    if "not behaviorally evaluated" not in rc_notes.lower() or "release candidate" not in rc_notes.lower():
+        errors.append("historical v2.0.0-rc.1 notes must identify the source as an unevaluated release candidate")
+    if (
+        "Final Source Release" not in final_v2_notes
+        or "chatgpt-codex-gpt-5-6-platform-managed" not in final_v2_notes
+        or "E1 reproducible" not in final_v2_notes
+        or "host-enforcement" not in final_v2_notes
+    ):
+        errors.append("v2.0.0 release notes must bind the final behavior result and its host boundary")
+    if (
+        "18 passed, 0 failed, 0 partial, 0 not run" not in behavior_scorecard
+        or "chatgpt-codex-gpt-5-6-platform-managed" not in behavior_scorecard
+        or "E1" not in behavior_scorecard
+        or "Do not generalize" not in behavior_scorecard
+    ):
+        errors.append("v2 behavior scorecard must state the completed configuration and non-generalization boundary")
     if "Owner Truth Card" not in v2_foundation or "trusted host" not in v2_foundation:
         errors.append("v2 foundation must state the owner card and trusted-host boundary")
     if "explicit-only" not in capability_matrix or "not enforcement" not in capability_matrix.lower():
         errors.append("v2 capability matrix must describe explicit routing and non-enforcement honestly")
-    if "v1.2.3" not in upgrade_path or "no overwrite" not in upgrade_path.lower():
+    if (
+        "v1.2.3" not in upgrade_path
+        or "no overwrite" not in upgrade_path.lower()
+        or "chatgpt-codex-gpt-5-6-platform-managed" not in upgrade_path
+    ):
         errors.append("v2 upgrade path must explain safe migration from v1.2.3 without overwrite")
     if (
-        "Version 2.0.0-rc.1" not in readme
+        "Version 2.0.0" not in readme
         or "24 focused Codex skills" not in readme
         or "$using-governed-suite" not in readme
-        or "not behaviorally evaluated" not in readme.lower()
+        or "fresh-context E1 behavior evaluation" not in readme
+        or "docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md" not in readme
     ):
-        errors.append("README.md must identify the 24-skill v2 release candidate and first-turn router honestly")
+        errors.append("README.md must identify the 24-skill final v2 source release and its bounded behavior evidence")
     if (
         "24 standalone skill folders" not in guide
         or "all 24 skills" not in guide
@@ -430,15 +466,15 @@ def validate_release_documents(repo: Path) -> list[str]:
     ):
         errors.append("INSTALL.md must describe 24-skill v2 discovery through the first-turn router")
     if (
-        "Version: 2.0.0-rc.1" not in manifest
+        "Version: 2.0.0" not in manifest
         or "24 portable skills" not in manifest
-        or "Eighteen adversarial evaluation fixtures" not in manifest
-        or "release candidate" not in manifest.lower()
+        or "completed E1 fresh-context result set" not in manifest
+        or "chatgpt-codex-gpt-5-6-platform-managed" not in manifest
     ):
-        errors.append("Export manifest must describe the v2 release-candidate scope without a behavior claim")
+        errors.append("Export manifest must describe the final v2 scope and bounded E1 behavior result")
     security = documents["SECURITY.md"].read_text(encoding="utf-8")
     if (
-        "v2.0.0-rc.1 standalone validator commands" not in security
+        "v2.0.0 standalone validator commands" not in security
         or "E1 reproducible receipt" not in security
         or "Neither mode proves independent agent identity" not in security
     ):
@@ -483,6 +519,15 @@ def validate_v2_owner_protection_spine(repo: Path) -> list[str]:
         for phrase in ("Orientation Card", "Owner Truth Card", "not a claim that the host automatically enforces governance"):
             if phrase not in text:
                 errors.append(f"using-governed-suite lacks required routing boundary: {phrase}")
+        if "Do not endorse a post-hoc test as equivalent to test-first evidence." not in text:
+            errors.append("using-governed-suite lacks the required test-first anti-rationalization rule")
+        if "Do not endorse an architecture for heavy traffic without a workload model and service targets." not in text:
+            errors.append("using-governed-suite lacks the required workload-model anti-rationalization rule")
+        if "Do not label the router's authority, an instruction, or a repository fact Verified without a permitted E2+ receipt." not in text:
+            errors.append("using-governed-suite lacks the required evidence-label anti-rationalization rule")
+        for guardrail in V2_ROUTER_GUARDRAILS:
+            if guardrail not in text:
+                errors.append(f"using-governed-suite lacks required owner-protection guardrail: {guardrail}")
     return errors
 
 

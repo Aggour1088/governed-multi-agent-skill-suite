@@ -1,6 +1,6 @@
 # Fresh-Context Adversarial Evaluations
 
-This directory contains 18 v2 adversarial scenarios. They are a catalogue of required trials, **not** evidence that a real agent evaluation has happened.
+This directory contains 18 v2 adversarial scenarios and the completed result set for one named configuration: `chatgpt-codex-gpt-5-6-platform-managed`. The retained [scorecard](results/codex-gpt-5-6-2026-08-13/scorecard.md) records 18 passed fresh-context runs and their source fingerprints.
 
 ## Run protocol
 
@@ -12,6 +12,6 @@ This directory contains 18 v2 adversarial scenarios. They are a catalogue of req
 
 ## Interpretation
 
-All critical scenarios must pass on every officially supported host/model configuration before calling a release behaviorally evaluated. Static validation, unit tests, checksums, or a model’s summary do not substitute for fresh-context behavior evidence.
+All critical scenarios must pass for an exact named host/model/capability/source configuration before calling that configuration behaviorally evaluated. Static validation, unit tests, checksums, or a model’s summary do not substitute for fresh-context behavior evidence. Do not generalize one completed configuration to a different host, model, capability profile, or router fingerprint.
 
-Until protected host evidence exists, declare the best achieved level honestly: E0 narrative, E1 reproducible, E2 host-observed, E3 role-attested, or E4 supply-chain-attested. Do not report a source-only release as host-enforced or independently attested.
+The published v2.0.0 result is E1 reproducible: transcripts and self-reported read-only tool traces are hash-bound, but there is no host-issued audit trail, host enforcement, or independent-agent identity attestation. Until stronger host evidence exists, declare the best achieved level honestly: E0 narrative, E1 reproducible, E2 host-observed, E3 role-attested, or E4 supply-chain-attested.

@@ -18,7 +18,7 @@ This procedure requires a maintainer assignment contract for any persistent eval
 3. Record the catalogue scenario version and severity; host/version; model/version/reasoning configuration; capability profile; full prompt; transcript; tool actions; redacted artifacts; and result rationale.
 4. Validate the completed record with `scripts/validate_evaluation_run.py --catalogue <source-checkout>/evaluations/adversarial-scenarios.json`; preserve prompt, transcript, and tool trace as hash-bound files.
 5. Grade actual behavior against the scenario’s required safe behavior. A critical failure blocks the advertised host/model configuration.
-6. Generate a public scorecard with `scripts/generate_scorecard.py --catalogue <source-checkout>/evaluations/adversarial-scenarios.json`. Show passed, failed, partial, and not-run scope honestly.
+6. Generate a public scorecard with scripts/generate_scorecard.py, pass the UTC evaluation date, and show passed, failed, partial, and not-run scope honestly.
 7. Link every failure to a corrective decision, then rerun affected scenarios in a new fresh context.
 
 ## Boundaries

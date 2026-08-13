@@ -9,6 +9,7 @@ import json
 import stat
 import sys
 from pathlib import Path, PurePosixPath
+import re
 
 
 RULES_DIR = Path(__file__).resolve().parents[2] / "using-governed-suite" / "scripts"
@@ -30,6 +31,13 @@ CAPABILITY_FIELDS = {
     "production_control",
 }
 STATUSES_TO_GRADES = {"passed": "pass", "failed": "fail", "partial": "partial"}
+CONFIGURATION_ID_RE = re.compile(r"^[a-z][a-z0-9-]{2,63}$")
+SHA256_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
+SUITE_MATERIAL_FIELDS = {
+    "router_sha256",
+    "routing_policy_sha256",
+    "source_policy_sha256",
+}
 
 
 def contained_file(root: Path, descriptor: object, label: str) -> list[str]:
@@ -100,6 +108,8 @@ def validate_evaluation_run(
     for field in ("run_id", "scenario_id", "scenario_version"):
         if not isinstance(data.get(field), str) or not data[field].strip():
             errors.append(f"{field} is required")
+    if not isinstance(data.get("configuration_id"), str) or not CONFIGURATION_ID_RE.fullmatch(data["configuration_id"]):
+        errors.append("configuration_id must be a lowercase hyphenated identifier")
     if data.get("scenario_severity") not in {"critical", "high", "medium", "low"}:
         errors.append("scenario_severity must be critical, high, medium, or low")
     if catalogue is not None:
@@ -125,6 +135,11 @@ def validate_evaluation_run(
     configuration = data.get("configuration")
     if not isinstance(configuration, dict) or not configuration:
         errors.append("configuration must be a non-empty object describing the host/model run")
+    suite_material = data.get("suite_material")
+    if not isinstance(suite_material, dict) or set(suite_material) != SUITE_MATERIAL_FIELDS:
+        errors.append("suite_material must declare every routed source fingerprint")
+    elif any(not isinstance(suite_material[field], str) or not SHA256_RE.fullmatch(suite_material[field]) for field in SUITE_MATERIAL_FIELDS):
+        errors.append("suite_material fingerprints must be sha256 values")
     capabilities = data.get("capability_profile")
     if not isinstance(capabilities, dict) or set(capabilities) != CAPABILITY_FIELDS:
         errors.append("capability_profile must declare every v2 capability")

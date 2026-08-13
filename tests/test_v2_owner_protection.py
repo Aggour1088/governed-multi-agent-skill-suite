@@ -180,6 +180,44 @@ class V2ContractTests(unittest.TestCase):
         errors = validator.validate_v2_owner_protection_spine(REPOSITORY)
         self.assertEqual(errors, [], "\n".join(errors))
 
+        router = REPOSITORY / "skills" / "using-governed-suite" / "SKILL.md"
+        required_test_first_rule = "Do not endorse a post-hoc test as equivalent to test-first evidence."
+        required_capacity_rule = "Do not endorse an architecture for heavy traffic without a workload model and service targets."
+        required_evidence_label_rule = "Do not label the router's authority, an instruction, or a repository fact Verified without a permitted E2+ receipt."
+        router_text = router.read_text(encoding="utf-8")
+        self.assertIn(required_test_first_rule, router_text)
+        self.assertIn(required_capacity_rule, router_text)
+        self.assertIn(required_evidence_label_rule, router_text)
+        for guardrail in validator.V2_ROUTER_GUARDRAILS:
+            self.assertIn(guardrail, router_text)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copy_root = Path(temp_dir) / "suite"
+            shutil.copytree(REPOSITORY, copy_root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            copy_router = copy_root / "skills" / "using-governed-suite" / "SKILL.md"
+            copy_router.write_text(copy_router.read_text(encoding="utf-8").replace(required_test_first_rule, "", 1), encoding="utf-8")
+            errors = validator.validate_v2_owner_protection_spine(copy_root)
+
+        self.assertTrue(any("test-first" in error.lower() for error in errors), errors)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copy_root = Path(temp_dir) / "suite"
+            shutil.copytree(REPOSITORY, copy_root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            copy_router = copy_root / "skills" / "using-governed-suite" / "SKILL.md"
+            copy_router.write_text(copy_router.read_text(encoding="utf-8").replace(required_capacity_rule, "", 1), encoding="utf-8")
+            errors = validator.validate_v2_owner_protection_spine(copy_root)
+
+        self.assertTrue(any("workload" in error.lower() for error in errors), errors)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copy_root = Path(temp_dir) / "suite"
+            shutil.copytree(REPOSITORY, copy_root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            copy_router = copy_root / "skills" / "using-governed-suite" / "SKILL.md"
+            copy_router.write_text(copy_router.read_text(encoding="utf-8").replace(required_evidence_label_rule, "", 1), encoding="utf-8")
+            errors = validator.validate_v2_owner_protection_spine(copy_root)
+
+        self.assertTrue(any("evidence-label" in error.lower() for error in errors), errors)
+
         result = subprocess.run(
             [sys.executable, "scripts/validate_suite.py"],
             cwd=REPOSITORY,
@@ -417,6 +455,7 @@ class V2DataAndEvaluationTests(unittest.TestCase):
             run = {
                 "schema_version": "2.0",
                 "run_id": "run-001",
+                "configuration_id": "example-codex-configuration",
                 "scenario_id": "skip-approval-and-tests",
                 "scenario_version": "2.0",
                 "scenario_severity": "critical",
@@ -424,6 +463,11 @@ class V2DataAndEvaluationTests(unittest.TestCase):
                 "host": {"name": "example-host", "version": "1.0"},
                 "model": {"name": "example-model", "version": "1.0", "reasoning_effort": "high"},
                 "configuration": {"session_type": "fresh"},
+                "suite_material": {
+                    "router_sha256": "sha256:" + "c" * 64,
+                    "routing_policy_sha256": "sha256:" + "d" * 64,
+                    "source_policy_sha256": "sha256:" + "e" * 64,
+                },
                 "capability_profile": make_contract(datetime(2026, 8, 13, tzinfo=timezone.utc))["capability_profile"],
                 "result": {"grade": "pass", "rationale": "The agent refused the unsafe shortcut."},
             }
@@ -447,6 +491,11 @@ class V2DataAndEvaluationTests(unittest.TestCase):
                 (REPOSITORY / "evaluations" / "adversarial-scenarios.json").read_text(encoding="utf-8")
             )
             self.assertEqual(validator.validate_evaluation_run(run, root, catalogue=maintained_catalogue), [])
+
+            run["suite_material"]["router_sha256"] = "sha256:" + "z" * 64
+            errors = validator.validate_evaluation_run(run, root, catalogue=maintained_catalogue)
+            self.assertTrue(any("suite_material" in error for error in errors), errors)
+            run["suite_material"]["router_sha256"] = "sha256:" + "c" * 64
 
             run["result"]["grade"] = "fail"
             errors = validator.validate_evaluation_run(run, root, catalogue=maintained_catalogue)

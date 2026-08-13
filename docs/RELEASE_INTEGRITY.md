@@ -29,7 +29,7 @@ In particular, checksums retrieved only from the same untrusted source as the tr
 
 ## Required maintainer publication sequence
 
-1. Start from the reviewed release-candidate tree. Confirm that the intended version and release notes are correct and that no unrelated or generated files are present.
+1. Start from the reviewed release tree. Confirm that the intended version, evidence boundaries, and release notes are correct and that no unrelated or generated files are present.
 2. Run the full validation sequence above. Correct every failure before proceeding.
 3. Regenerate the inventory only if approved content changed:
 
@@ -44,7 +44,7 @@ In particular, checksums retrieved only from the same untrusted source as the tr
 
 4. Commit the exact release tree, including `SHA256SUMS`, and obtain the required review before creating the tag.
 5. At the final merged commit, rerun the consumer verification commands without `--write`. Do not alter the tree after this verification.
-6. Create a versioned annotated tag at that exact verified commit, for example `v2.0.0-rc.1`. Do not promote a release candidate to a final major release until its required live-host behavioral evaluation evidence is present.
+6. Create a versioned annotated tag at that exact verified commit, for example `v2.0.0`. Do not state a behavior claim broader than the completed, named host/model/capability/source configuration recorded in the release evidence.
 7. Create a GitHub Release from that tag. Attach `SHA256SUMS` and, when produced, an archive built from the same tag.
 8. If the release is described as **signed**, the repository owner must sign the tag or checksum with the owner's signing key and publish the corresponding public key or trusted verification path.
 

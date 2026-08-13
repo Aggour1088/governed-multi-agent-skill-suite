@@ -3,9 +3,9 @@
 ## Release identity
 
 - Name: Governed Multi-Agent Skill Suite
-- Version: 2.0.0-rc.1
+- Version: 2.0.0
 - Export date: 2026-08-13
-- Source: release source tree; validation results are checked separately and are not embedded proof artifacts
+- Source: release source tree with a hash-bound E1 fresh-context behavior scorecard for one named configuration
 - Publication status: a matching GitHub versioned tag and Release page establish publication; this manifest does not assert whether either exists
 - License: Apache License 2.0
 
@@ -17,7 +17,7 @@
 - The supported [installation and verification guide](../INSTALL.md).
 - A structural validator, a repository-scope installer, no-dependency tests, and a GitHub Actions workflow.
 - `SHA256SUMS`, a security policy, and a release-integrity guide that distinguish checksummed content from a signed release.
-- Eighteen adversarial evaluation fixtures under `evaluations/`; they are intentionally marked `not-run` until fresh-context host evidence is stored. This is a release candidate, not a claim that v2 behavior has been evaluated on a live host/model configuration.
+- Eighteen adversarial evaluation scenarios and a completed E1 fresh-context result set under `evaluations/`. All 18 scenarios passed only for `chatgpt-codex-gpt-5-6-platform-managed`; raw transcripts and tool traces are retained. This is not host enforcement, independent-agent identity attestation, or a claim for other hosts/models.
 - An optional local evidence runner under `adapters/`; it provides bounded receipts but is not a production host adapter, identity provider, or deployment controller.
 - No project-specific source files, database exports, credentials, or user data.
 

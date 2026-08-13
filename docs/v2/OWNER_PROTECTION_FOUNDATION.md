@@ -2,7 +2,7 @@
 
 ## Status and purpose
 
-This is the implementation foundation for the v2.0.0 release-candidate line. It turns the suite from a collection of good procedures into a clearer owner-control layer: an AI agent must expose authority, evidence, uncertainty, scope, and recovery before asking a non-programmer to decide.
+This is the implementation foundation for the v2.0.0 source-release line. It turns the suite from a collection of good procedures into a clearer owner-control layer: an AI agent must expose authority, evidence, uncertainty, scope, and recovery before asking a non-programmer to decide.
 
 It does not claim that Markdown instructions alone enforce permissions, verify a command, prove separate identities, or protect production.
 
@@ -47,7 +47,7 @@ The suite never upgrades E1 to E2, E2 to E3, or E3 to E4 by wording alone.
 
 The core source package targets compatible Codex CLI/IDE project environments with explicit routing, repository-scoped skills, worktree-capable Git, and Python 3. It is deliberately not a ChatGPT web plugin and does not claim one-click web installation.
 
-The release candidate has structural and deterministic tests. It is not behaviorally evaluated until fresh-context raw results exist for a named host/model/capability configuration. It is not production-enforcing until protected CI/deployment and credential boundaries are configured outside the agent workspace.
+The v2.0.0 source has structural and deterministic tests plus a completed E1 fresh-context result set for all 18 maintained scenarios on the named configuration recorded in the [behavior scorecard](BEHAVIOR_SCORECARD_v2.0.0.md). That result does not apply to other hosts, models, capability profiles, or changed source fingerprints. The suite is not production-enforcing until protected CI/deployment and credential boundaries are configured outside the agent workspace.
 
 ## Acceptance conditions for a final v2.0 release
 

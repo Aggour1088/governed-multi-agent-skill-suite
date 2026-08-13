@@ -1,0 +1,81 @@
+{
+  "schema_version": "2.0",
+  "contract_id": "replace-with-lowercase-id",
+  "status": "proposed",
+  "project": {
+    "id": "replace-with-project-id",
+    "baseline_revision": "replace-with-40-character-git-revision"
+  },
+  "lifecycle_state": "PLAN",
+  "risk_track": "Standard",
+  "created_at": "2026-01-01T00:00:00Z",
+  "expires_at": "2026-01-02T00:00:00Z",
+  "outcome": {
+    "owner_visible_result": "Describe the user or business result.",
+    "acceptance_criteria": ["State measurable acceptance criteria."],
+    "exclusions": ["State what must not change."],
+    "non_goals": ["State deferred work."],
+    "success_metrics": ["State the measure or evidence of success."]
+  },
+  "approved_sources": [
+    {
+      "id": "foundation",
+      "path": ".governance/features/example/foundation.md",
+      "sha256": "sha256:replace-with-64-lowercase-hex-characters"
+    }
+  ],
+  "scope": {
+    "owned_targets": ["src/example.py"],
+    "interfaces": ["example.interface"],
+    "database_objects": [],
+    "environments": ["test"],
+    "parallel_write_groups": []
+  },
+  "authority": {
+    "mutation_allowed": true,
+    "allowed_commands": [
+      {
+        "id": "focused-test",
+        "argv": ["python3", "-m", "unittest"],
+        "cwd": ".",
+        "timeout_seconds": 300
+      }
+    ],
+    "dependency_changes": "forbidden",
+    "production_action": "prohibited"
+  },
+  "roles": {
+    "implementer_id": "implementer-session",
+    "tester_id": "tester-session",
+    "reviewer_id": "reviewer-session",
+    "independence_claim": "not-attested"
+  },
+  "evidence": {
+    "minimum_level": "E1",
+    "freshness_hours": 24,
+    "required_checks": ["independent-test", "independent-review"]
+  },
+  "operations": {
+    "rollback_or_forward_recovery": "State the tested reversal or containment route.",
+    "stop_conditions": ["State the condition that halts work."],
+    "observation_period": "State why observation is or is not required."
+  },
+  "economics": {
+    "model_tier": "standard",
+    "reasoning_effort": "medium",
+    "max_turns": 8,
+    "max_cost": "owner-approved budget",
+    "fix_circuit_breaker": 2
+  },
+  "capability_profile": {
+    "skill_routing": "explicit-only",
+    "tool_mediation": "advisory",
+    "agent_identity": "session-label",
+    "workspace_isolation": "worktree",
+    "test_evidence": "reproducible",
+    "browser_verification": "manual",
+    "ci_cd_integration": "reporting-only",
+    "secret_boundary": "environment-scoped",
+    "production_control": "owner-confirmed"
+  }
+}

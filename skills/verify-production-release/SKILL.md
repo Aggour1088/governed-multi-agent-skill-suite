@@ -33,6 +33,10 @@ When deployment is explicitly authorized:
 
 Never describe a successful deployment command as feature completion.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a deployment summary remains **Reported** or **Reproducible** without protected evidence. Stop if exact artifact, target, authorization, recovery route, observation, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/production-release-record-template.md' — release and observation record.

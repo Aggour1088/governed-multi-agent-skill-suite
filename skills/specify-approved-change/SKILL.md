@@ -34,6 +34,10 @@ Do not treat a test list as a specification or a technical plan as a business de
 
 Hand the specification to $architect-system-deliberately and $plan-governed-implementation. Require $guard-approved-artifacts before implementation.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; an unapproved requirement remains **Reported** or **Unknown**. Stop if the Foundation, business rule, acceptance evidence, scope, or freshness is missing or stale.
+
 ## Resources
 
 - 'assets/specification-template.md' — specification artifact.

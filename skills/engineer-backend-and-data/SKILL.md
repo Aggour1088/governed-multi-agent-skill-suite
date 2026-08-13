@@ -28,6 +28,10 @@ During active governed delivery, accept only a bounded assignment contract from 
 
 Stop for an unapproved data operation, unknown data ownership, missing authorization model, unsafe migration, unverified schema compatibility, financial/calculation ambiguity, sensitive-data exposure, new dependency, or architecture change.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; self-written logs remain **Reported** or **Reproducible**. Stop if the data contract, authorization, migration recovery, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/backend-data-change-record-template.md' — implementation return record.

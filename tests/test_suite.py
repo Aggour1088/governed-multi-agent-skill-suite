@@ -64,7 +64,7 @@ class SuiteValidationTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertIn("PASS: 20 skills", result.stdout)
+        self.assertIn("PASS: 24 skills", result.stdout)
 
     def test_release_documentation_passes_policy_validation(self) -> None:
         repository = Path(__file__).resolve().parents[1]

@@ -36,6 +36,10 @@ Treat a material UX decision as a Foundation change when it alters role access, 
 
 Provide journey, state, content, accessibility, localization, and owner-control requirements to $specify-approved-change and $engineer-frontend-accessibly. Request the UI/UX audit mode from $assure-quality-systematically when implementation needs independent visual and usability evidence.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a screenshot or design opinion remains **Reported** or **Reproducible**. Stop if the approved user outcome, accessibility evidence, or scope is missing or stale.
+
 ## Resources
 
 - 'assets/ux-foundation-template.md' — complex-experience artifact.

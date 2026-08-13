@@ -1,23 +1,33 @@
-# Owner Decision Packet: <package or milestone>
+# Owner Truth Card: <package or milestone>
 
-**Recommendation:** Approve / Reject / Revise / Wait / Release
+**Decision needed:** <one owner decision>  
+**Recommendation:** Approve / Reject / Revise / Wait / Release  
+**Risk track:** Fast / Standard / Enhanced / Critical  
+**Evidence level:** E0 / E1 / E2 / E3 / E4
 
-## The outcome
+## Owner-visible outcome
 
-<What you asked for and what is now true>
+<What was requested, what is now true, and what is excluded>
 
-## Independent checks
+## Facts and unknowns
 
-<What a separate tester and reviewer checked, in ordinary language>
+- **Verified:** <only capability-permitted E2+ host or CI evidence>
+- **Reproducible:** <exact local command, artifact, or receipt>
+- **Reported / Inferred:** <claim and its limitation>
+- **Unknown / Failed:** <blocker, containment, owner, and deadline>
 
-## What still matters
+## Checks and economics
 
-<Any limitation, failed or unavailable check, containment, owner, and deadline>
+<What testing and review actually occurred; distinct-principal status; expected cost/time and remaining budget>
 
-## Your decision
+## Recovery and stop conditions
 
-<One decision and the practical effect of each choice>
+<Rollback or forward recovery, observation, and the condition that halts the work>
 
-## Evidence
+## Decision effect
 
-<Technical records available on request>
+<The practical consequence of each owner option>
+
+## Evidence links
+
+<Hash-bound technical records available on request>

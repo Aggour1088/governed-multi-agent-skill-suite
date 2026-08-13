@@ -28,6 +28,10 @@ Do not change the implementation, approve the package, or hide unavailable evide
 
 Use a distinct tester identity from the implementer and reviewer. If the host cannot provide one, label the result 'separate pass, not independent' and let the orchestrator apply the constitution's limits.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a self-written log remains **Reported** or **Reproducible**. Stop if contract scope, test authority, evidence freshness, or test data safety is missing or stale.
+
 ## Resources
 
 - 'assets/independent-test-report-template.md' — QA record.

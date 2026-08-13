@@ -31,6 +31,10 @@ A decision is incomplete when it lacks: current-state evidence, options, trade-o
 
 Hand the architecture record to $plan-governed-implementation. Request $secure-and-protect-system or $engineer-performance-and-reliability when the impact matrix requires their input.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a self-written log remains **Reported** or **Reproducible**. Stop if contract scope, authority, workload evidence, or freshness is missing or stale.
+
 ## Resources
 
 - 'assets/architecture-record-template.md' — architecture and ADR structure.

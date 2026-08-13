@@ -11,7 +11,7 @@ Do not implement product changes, self-test, self-review, or make business accep
 
 ## Establish control
 
-1. Read the project constitution and current feature artifacts before taking action.
+1. Route the request through `$using-governed-suite`, then read the project constitution, capability profile, and current feature artifacts before taking action.
 2. State the current lifecycle state, risk track, verified facts, assumptions, blockers, and next decision in plain language.
 3. Split a request into owner-visible work packages only when outcomes, risks, owners, releases, or rollback paths differ.
 4. Treat a work package as the smallest coherent deliverable that can be assigned, tested, reviewed, and accepted without hiding material risk.
@@ -41,6 +41,7 @@ Assign roles from the actual work, not job-title prestige:
 
 | Need | Assign the procedure |
 | --- | --- |
+| First request classification, authority, owner decision, or capability limit | $using-governed-suite |
 | Idea, owner choices, and scope | $shape-feature-foundation |
 | User journeys and interface outcomes | $design-human-centered-experience |
 | Requirements or contracts | $specify-approved-change |
@@ -58,6 +59,9 @@ Assign roles from the actual work, not job-title prestige:
 | Independent raw-diff review | $review-governed-change |
 | Evidence provenance and freshness | $verify-implementation |
 | Release and production observation | $verify-production-release |
+| Isolated multi-agent workspace, ledger, ownership, or resumption | $coordinate-isolated-agent-execution |
+| Schema migration, persistent-data change, backfill, recovery, or data export | $govern-data-change-safely |
+| Fresh-context host/model behavior evaluation | $evaluate-governed-agent-behavior |
 
 ## Enforce separation of duties
 
@@ -94,14 +98,19 @@ Lead with the outcome and one decision needed. Explain:
 
 Keep raw logs and implementation detail linked as evidence. Never hide a limitation to make a report easier to read.
 
+## V2 contract and evidence boundary
+
+Route every governed request through `$using-governed-suite` before exploration, delegation, mutation, or a completion claim. Require the current v2 contract for mutating work and present an Owner Truth Card for every material owner decision. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; agent narration and local validator output remain **Reported** or **Reproducible**. Stop if authority, scope, approved source, evidence freshness, or recovery path is missing or stale.
+
 ## Direct specialist invocation
 
 When a specialist procedure is invoked directly in an active governed project, permit only a bounded read-only consultation unless this orchestrator has supplied an assignment contract. Do not let it edit, accept work, or communicate an owner decision directly.
 
 ## Resources
 
-- 'assets/work-package-record-template.json' — machine-checkable package record.
-- 'assets/owner-decision-packet-template.md' — owner-facing report format.
+- `$using-governed-suite` — required v2 work-package contract, capability profile, and Owner Truth Card.
+- 'assets/work-package-record-template.json' — compatibility record for the legacy standalone integrity validator; it is not a second v2 authorization schema.
+- 'assets/owner-decision-packet-template.md' — Owner Truth Card-compatible owner-facing report format.
 - 'references/routing-and-impact-matrix.md' — role-selection rules.
 - 'references/fresh-agent-evaluation-protocol.md' — adversarial evaluation protocol.
 - 'scripts/validate_work_package.py' — contract and evidence validator.

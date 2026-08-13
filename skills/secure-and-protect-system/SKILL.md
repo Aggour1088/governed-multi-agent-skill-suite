@@ -28,6 +28,10 @@ During active governed delivery, receive a bounded assignment contract from $orc
 
 Escalate suspected credential exposure, authorization bypass, tenant/data leakage, destructive abuse path, sensitive-data mishandling, untrusted instruction override, or active exploit signal. Do not attempt production exploitation.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a security claim without scoped controls and retest evidence remains **Unknown** or **Reported**. Stop if secrets, data classification, authority, exception expiry, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/security-assessment-template.md' — security verifier record.

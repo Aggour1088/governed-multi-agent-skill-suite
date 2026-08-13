@@ -28,6 +28,10 @@ During active governed delivery, work only under an implementation assignment. D
 
 Use a documented exception only when a failing-first test is impractical or unsafe. Explain why, name the alternate proof, get it accepted in the assignment contract, and still require independent testing and review.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; self-written red-green records are **Reproducible** until independently observed. Stop if the approved behavior, exception authority, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/test-first-evidence-template.md' — red-green-refactor record.

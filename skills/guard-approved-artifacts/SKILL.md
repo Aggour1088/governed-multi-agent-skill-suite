@@ -30,6 +30,10 @@ Do not implement code, change artifacts silently, or accept a package.
 
 Do not call a conflict resolved merely because a reasonable agent could guess an answer.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; an unchecked artifact remains **Unknown**. Stop if approval, scope, contract freshness, or evidence binding is missing or stale.
+
 ## Resources
 
 - 'assets/artifact-gate-report-template.md' — gate decision record.

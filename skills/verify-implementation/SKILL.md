@@ -32,6 +32,10 @@ During active governed delivery, receive all raw records through $orchestrate-ow
 - Failed: observed behavior contradicts requirement.
 - Not applicable: justified explicitly.
 
+## V2 contract and evidence boundary
+
+Route this work through `$using-governed-suite` and the current v2 contract. Classify material statements as **Verified**, **Reproducible**, **Reported**, **Inferred**, **Unknown**, or **Failed**. Only an allowed E2+ host or CI receipt may support **Verified**; a raw self-declared record remains **Reported** or **Reproducible**. Stop if provenance, identity limits, scope, or evidence freshness is missing or stale.
+
 ## Resources
 
 - 'assets/implementation-evidence-template.md' — evidence decision.

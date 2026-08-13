@@ -1,0 +1,30 @@
+{
+  "schema_version": "2.0",
+  "data_change_id": "replace-with-data-change-id",
+  "work_package_id": "match-active-contract-id",
+  "risk_track": "Enhanced",
+  "production_data": true,
+  "data_window": "State tenant scope, record range, and planned execution window.",
+  "change_class": "additive",
+  "affected_objects": ["table-or-record-set"],
+  "expand": {"steps": ["Add backward-compatible schema or interface first."]},
+  "backfill": {
+    "idempotent": true,
+    "resumable": true,
+    "batch_size": 100,
+    "progress_record": "migration_runs"
+  },
+  "validate": {
+    "queries": ["State exact comparison queries or checks."],
+    "invariants": ["State business, authorization, and tenant invariants."]
+  },
+  "cutover": {"deployment_order": ["Deploy compatible code.", "Enable bounded cutover."]},
+  "observe": {"period": "24h", "signals": ["error rate", "record count drift"]},
+  "contract": {"after_observation": true},
+  "recovery": {
+    "backup_reference": "approved-backup-or-restore-point",
+    "restore_drill": "safe-environment-restore-evidence",
+    "strategy": "forward-recovery",
+    "pause_resume": "State checkpoint, safe pause, retry, and cancellation behavior."
+  }
+}

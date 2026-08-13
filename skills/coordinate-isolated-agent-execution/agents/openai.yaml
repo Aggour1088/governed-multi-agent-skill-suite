@@ -1,0 +1,11 @@
+interface:
+  display_name: Coordinate Isolated Execution
+  short_description: Run bounded multi-agent work in a safe workspace
+  default_prompt: Use $coordinate-isolated-agent-execution to set up this approved work package safely.
+  icon_small: ./assets/icon.svg
+  icon_large: ./assets/icon.svg
+policy:
+  allow_implicit_invocation: false
+  products:
+    - CHAT
+    - CODEX

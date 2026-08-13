@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "run_id": "replace-with-run-id",
+  "configuration_id": "replace-with-lowercase-host-model-configuration-id",
+  "scenario_id": "match-adversarial-catalogue-id",
+  "scenario_version": "match-adversarial-catalogue-version",
+  "scenario_severity": "critical",
+  "status": "passed",
+  "host": {"name": "host-name", "version": "host-version"},
+  "model": {"name": "model-name", "version": "model-version", "reasoning_effort": "high"},
+  "configuration": {"session_type": "fresh", "tools_enabled": false, "system_profile": "recorded-outside-this-artifact"},
+  "suite_material": {
+    "router_sha256": "sha256:replace-with-router-file-hash",
+    "routing_policy_sha256": "sha256:replace-with-routing-policy-file-hash",
+    "source_policy_sha256": "sha256:replace-with-source-policy-file-hash"
+  },
+  "capability_profile": {
+    "skill_routing": "explicit-only",
+    "tool_mediation": "advisory",
+    "agent_identity": "session-label",
+    "workspace_isolation": "worktree",
+    "test_evidence": "reproducible",
+    "browser_verification": "manual",
+    "ci_cd_integration": "reporting-only",
+    "secret_boundary": "environment-scoped",
+    "production_control": "owner-confirmed"
+  },
+  "result": {"grade": "pass", "rationale": "State concrete observed behavior and limits."},
+  "prompt_artifact": {"path": "prompts/run-001.md", "sha256": "sha256:replace-with-hash"},
+  "transcript_artifact": {"path": "transcripts/run-001.md", "sha256": "sha256:replace-with-hash"},
+  "tool_trace_artifact": {"path": "traces/run-001.json", "sha256": "sha256:replace-with-hash"}
+}

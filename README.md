@@ -1,22 +1,29 @@
 # Governed Multi-Agent Skill Suite
 
-Version 2.0.0 — source release. Install only from a published versioned tag or release archive, not from a mutable branch. The first-turn router completed a fresh-context E1 behavior evaluation for the exact `chatgpt-codex-gpt-5-6-platform-managed` configuration: all 18 maintained scenarios passed. See the [behavior scorecard](docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md) for the retained evidence and limits.
+Version 2.0.1 — documentation-rendering patch on the v2.0.0 source release. Install only from a published versioned tag or release archive, not from a mutable branch. The first-turn router completed a fresh-context E1 behavior evaluation for the exact `chatgpt-codex-gpt-5-6-platform-managed` configuration: all 18 maintained scenarios passed. See the [behavior scorecard](docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md) for the retained evidence and limits.
 
 This is a source distribution of 24 focused Codex skills for owner-governed software delivery. It is for technical users or authorized AI agents that can work with local project files, Git, Python 3, and Codex. It is not a one-click installation, a hosted service, or a universal ChatGPT web feature.
 
 ## Intended operating model
 
-```mermaid
-flowchart TD
-    O["Product owner"] <--> C["Orchestrator"]
-    C --> I["Implementation role"]
-    I --> T["Testing role"]
-    I --> R["Review role"]
-    T --> C
-    R --> C
-    C --> A["Plain-language decision packet"]
-    A --> O
+```text
+Product owner <----------------------> Orchestrator
+                                         |
+                                         v
+                              Implementation role
+                                  /         \
+                                 v           v
+                         Testing role     Review role
+                                 \           /
+                                  \         /
+                                   v       v
+                                 Orchestrator
+                                         |
+                                         v
+                    Plain-language decision packet --> Product owner
 ```
+
+This plain-text diagram avoids GitHub's optional rich-diagram renderer while preserving the operating flow.
 
 The skills instruct agents to use this workflow and the bundled validators check selected records and files. They do not create host-level access control, authenticate identities, prove that separate agents were used, or prevent a user from invoking a specialist directly.
 
@@ -115,7 +122,7 @@ Never add `--write` to the first command when verifying a downloaded release. Th
 
 Install only from a published versioned tag or release archive, never directly from `main`. A matching GitHub tag and Release page establish publication; this source file does not assert whether any particular tag has been published. Follow the maintainer-only sequence in [Release Integrity](docs/RELEASE_INTEGRITY.md) before creating a new tag. A GitHub repository or tag is a source-distribution mechanism; it does not automatically install or attest the skills.
 
-Read the [v2.0.0 release notes](docs/RELEASE_NOTES_v2.0.0.md), [behavior scorecard](docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md), and [v2 owner-protection foundation](docs/v2/OWNER_PROTECTION_FOUNDATION.md) before upgrading. This is a final source release, but its behavioral result must not be generalized beyond the named E1 configuration.
+Read the [v2.0.1 release notes](docs/RELEASE_NOTES_v2.0.1.md), [behavior scorecard](docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md), and [v2 owner-protection foundation](docs/v2/OWNER_PROTECTION_FOUNDATION.md) before upgrading. This is a final source release, but its behavioral result must not be generalized beyond the named E1 configuration.
 
 ## Scope
 

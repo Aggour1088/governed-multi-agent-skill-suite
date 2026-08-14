@@ -66,18 +66,27 @@ The default owner checkpoints are: direction approval, exact Foundation approval
 
 ## 5. Communication and delegation model
 
-```mermaid
-flowchart TD
-    U["Product owner"] <--> O["Orchestrator"]
-    O --> I["Implementer(s)"]
-    I --> T["Independent tester"]
-    I --> R["Independent reviewer"]
-    T --> O
-    R --> O
-    O --> V["Evidence verification"]
-    V --> O
-    O --> U
+```text
+Product owner <----------------------> Orchestrator
+                                         |
+                                         v
+                                  Implementer(s)
+                                  /           \
+                                 v             v
+                     Independent tester   Independent reviewer
+                                  \           /
+                                   \         /
+                                    v       v
+                                  Orchestrator
+                                         |
+                                         v
+                            Evidence verification
+                                         |
+                                         v
+                                  Orchestrator --> Product owner
 ```
+
+This plain-text diagram is deliberately used instead of a GitHub rich diagram so the documentation remains readable when the renderer is unavailable.
 
 ### 5.1 What the orchestrator tells the owner
 

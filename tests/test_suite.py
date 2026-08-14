@@ -148,6 +148,23 @@ class SuiteValidationTests(unittest.TestCase):
 
         self.assertTrue(any("broken local Markdown link" in error for error in errors), errors)
 
+    def test_documentation_validator_rejects_mermaid_in_public_docs(self) -> None:
+        repository = Path(__file__).resolve().parents[1]
+        validator = load_validator(repository)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copy_root = Path(temp_dir) / "suite"
+            shutil.copytree(repository, copy_root, ignore=shutil.ignore_patterns(".git", "__pycache__"))
+            readme = copy_root / "README.md"
+            readme.write_text(
+                readme.read_text(encoding="utf-8") + "\n```mermaid\nflowchart TD\n    A --> B\n```\n",
+                encoding="utf-8",
+            )
+
+            errors = validator.validate_release_documents(copy_root)
+
+        self.assertTrue(any("Mermaid" in error for error in errors), errors)
+
     def test_repository_installer_creates_an_empty_directory_and_blocks_any_existing_entry(self) -> None:
         repository = Path(__file__).resolve().parents[1]
 

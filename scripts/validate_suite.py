@@ -62,6 +62,7 @@ RELEASE_DOCUMENTS = (
     "docs/RELEASE_NOTES_v1.2.3.md",
     "docs/RELEASE_NOTES_v2.0.0-rc.1.md",
     "docs/RELEASE_NOTES_v2.0.0.md",
+    "docs/RELEASE_NOTES_v2.0.1.md",
     "docs/v2/OWNER_PROTECTION_FOUNDATION.md",
     "docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md",
     "docs/v2/CAPABILITY_MATRIX.md",
@@ -312,6 +313,10 @@ def validate_release_documents(repo: Path) -> list[str]:
         if not document.is_file():
             continue
         text = document.read_text(encoding="utf-8")
+        if "```mermaid" in text.lower():
+            errors.append(
+                f"{name} uses a Mermaid rich diagram; release documentation must use a portable plain-text or static alternative"
+            )
         for forbidden_path in FORBIDDEN_RUNTIME_PATHS:
             if forbidden_path in text:
                 errors.append(f"{name} exposes an internal runtime path: {forbidden_path}")
@@ -421,6 +426,7 @@ def validate_release_documents(repo: Path) -> list[str]:
         errors.append("v1.2.3 release notes must state the publication and live-discovery limits")
     rc_notes = documents["docs/RELEASE_NOTES_v2.0.0-rc.1.md"].read_text(encoding="utf-8")
     final_v2_notes = documents["docs/RELEASE_NOTES_v2.0.0.md"].read_text(encoding="utf-8")
+    patch_v2_notes = documents["docs/RELEASE_NOTES_v2.0.1.md"].read_text(encoding="utf-8")
     v2_foundation = documents["docs/v2/OWNER_PROTECTION_FOUNDATION.md"].read_text(encoding="utf-8")
     behavior_scorecard = documents["docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md"].read_text(encoding="utf-8")
     capability_matrix = documents["docs/v2/CAPABILITY_MATRIX.md"].read_text(encoding="utf-8")
@@ -434,6 +440,12 @@ def validate_release_documents(repo: Path) -> list[str]:
         or "host-enforcement" not in final_v2_notes
     ):
         errors.append("v2.0.0 release notes must bind the final behavior result and its host boundary")
+    if (
+        "GitHub Rendering Compatibility Patch" not in patch_v2_notes
+        or "does not change the skills" not in patch_v2_notes
+        or "v2.0.0" not in patch_v2_notes
+    ):
+        errors.append("v2.0.1 release notes must state the rendering fix and preserved v2.0.0 behavior evidence")
     if (
         "18 passed, 0 failed, 0 partial, 0 not run" not in behavior_scorecard
         or "chatgpt-codex-gpt-5-6-platform-managed" not in behavior_scorecard
@@ -452,13 +464,13 @@ def validate_release_documents(repo: Path) -> list[str]:
     ):
         errors.append("v2 upgrade path must explain safe migration from v1.2.3 without overwrite")
     if (
-        "Version 2.0.0" not in readme
+        "Version 2.0.1" not in readme
         or "24 focused Codex skills" not in readme
         or "$using-governed-suite" not in readme
         or "fresh-context E1 behavior evaluation" not in readme
         or "docs/v2/BEHAVIOR_SCORECARD_v2.0.0.md" not in readme
     ):
-        errors.append("README.md must identify the 24-skill final v2 source release and its bounded behavior evidence")
+        errors.append("README.md must identify the 24-skill v2.0.1 source release and its bounded behavior evidence")
     if (
         "24 standalone skill folders" not in guide
         or "all 24 skills" not in guide
@@ -466,7 +478,7 @@ def validate_release_documents(repo: Path) -> list[str]:
     ):
         errors.append("INSTALL.md must describe 24-skill v2 discovery through the first-turn router")
     if (
-        "Version: 2.0.0" not in manifest
+        "Version: 2.0.1" not in manifest
         or "24 portable skills" not in manifest
         or "completed E1 fresh-context result set" not in manifest
         or "chatgpt-codex-gpt-5-6-platform-managed" not in manifest
@@ -474,7 +486,7 @@ def validate_release_documents(repo: Path) -> list[str]:
         errors.append("Export manifest must describe the final v2 scope and bounded E1 behavior result")
     security = documents["SECURITY.md"].read_text(encoding="utf-8")
     if (
-        "v2.0.0 standalone validator commands" not in security
+        "v2.0.1 standalone validator commands" not in security
         or "E1 reproducible receipt" not in security
         or "Neither mode proves independent agent identity" not in security
     ):
